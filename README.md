@@ -1,78 +1,37 @@
-# Rails CRUD API Template
+# ABOUT
+    A small  rails API for managing orders.
+    Each 'order' should have a 'total' and a 'status'.
+    I should be able to 'create' an order and 'view all orders'.”
 
-## Overview
+# STEPS
+- rails db:migrate:status
+- rails g model order total:string status:string
+- rails db:migrate:status
+- rails g controller orders 
+- build controller logic
+- build routes logic/maping
+- amend migration file for default status
+- test following TESTING
 
-This is a minimal Ruby on Rails API template used to:
-* practice CRUD operations, 
-* RESTful API design, 
-* data transformations, and 
-* debugging workflows.
+# TESTING
+1. rails s (on a new terminal)
 
-It is intentionally lightweight to support fast iteration and practice.
+2. open localhost on a browser
 
----
+3. ## Tests Creating a POST
+curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"200", "status":"unpaid"}}'
 
-## Tech Stack
+4. ## Tests Creating a POST
+curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"20", "status":"paid"}}'
 
-* Ruby
-* Ruby on Rails (API-only mode)
-* PostgreSQL (already 'rails db:create + rails db:migrate')
-* RSpec (testing)
-* RuboCop (linting)
-* SimpleCov (test coverage)
+5. ## Tests Creating a POST and the default status 
+curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"0.90"}}'
 
----
+6. ## Tests Creating a POST and the downcase status
+curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"20", "status":"Paid"}}'
 
-## Purpose
+6. http://127.0.0.1:3000/orders
 
-This template is used to practice core backend engineering patterns:
+7. http://127.0.0.1:3000/orders/2
 
-* CRUD API development (create, read, update, delete)
-* RESTful routing and controller design
-* Data filtering and transformation logic
-* Writing and debugging tests
-* Simulating real-world backend tasks
-
----
-
-## Setup
-
-```bash id="q8m1xv"
-bundle install
-rails db:create
-rails db:migrate
-rails server
-```
-
----
-
-## Testing
-
-```bash id="t4k9lz"
-bundle exec rspec
-```
-
----
-
-## Linting
-
-```bash id="w2p7qa"
-bundle exec rubocop
-```
-
----
-
-## Example Endpoints (practice targets)
-
-* POST /users
-* GET /users/:id
-* PATCH /users/:id
-* DELETE /users/:id
-* GET /users?status=active (filtering)
-
----
-
-## Notes
-
-This project is intentionally minimal. 
-Features addition incrementally to focus on understanding core backend patterns rather than framework complexity.
+8. http://127.0.0.1:3000/orders/
