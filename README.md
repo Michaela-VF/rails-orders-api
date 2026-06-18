@@ -1,37 +1,89 @@
-# ABOUT
-    A small  rails API for managing orders.
-    Each 'order' should have a 'total' and a 'status'.
-    I should be able to 'create' an order and 'view all orders'.”
+# Orders API (Rails)
 
-# STEPS
-- rails db:migrate:status
-- rails g model order total:string status:string
-- rails db:migrate:status
-- rails g controller orders 
-- build controller logic
-- build routes logic/maping
-- amend migration file for default status
-- test following TESTING
+A small Ruby on Rails API for managing orders.
+This project was built as a lightweight backend service 
+to practice RESTful API design in Rails.
 
-# TESTING
-1. rails s (on a new terminal)
+---
 
-2. open localhost on a browser
+## Features
 
-3. ## Tests Creating a POST
-curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"200", "status":"unpaid"}}'
+- Create new orders
+- View all orders
+- View individual orders
+- Basic order attributes:
+  - `total` (string)
+  - `status` (string)
 
-4. ## Tests Creating a POST
-curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"20", "status":"paid"}}'
+---
 
-5. ## Tests Creating a POST and the default status 
-curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"0.90"}}'
+## API Endpoints
 
-6. ## Tests Creating a POST and the downcase status
-curl -X POST http://127.0.0.1:3000/orders -H "Content-Type: application/json" -d '{"order":{"total":"20", "status":"Paid"}}'
+### Get all orders
 
-6. http://127.0.0.1:3000/orders
+```http
+GET /orders
+```
 
-7. http://127.0.0.1:3000/orders/2
+### Get a single order
 
-8. http://127.0.0.1:3000/orders/
+```http
+GET /orders/:id
+```
+
+### Create an order
+
+```http
+POST /orders
+```
+
+**Example request body:**
+
+```json
+{
+  "order": {
+    "total": "200",
+    "status": "unpaid"
+  }
+}
+```
+
+N.B: `status` is required and validated by the application. 
+The db also defines a default value of `pending` as a defensive fallback.
+---
+
+## Example Usage
+
+Create an order:
+
+```bash
+curl -X POST http://127.0.0.1:3000/orders \
+-H "Content-Type: application/json" \
+-d '{"order":{"total":"20","status":"paid"}}'
+```
+
+Fetch all orders:
+
+```http
+GET http://127.0.0.1:3000/orders
+```
+
+Fetch a single order:
+
+```http
+GET http://127.0.0.1:3000/orders/1
+```
+
+---
+
+## Tech Stack
+
+- Ruby
+- Ruby on Rails
+- SQLite
+
+---
+
+## Purpose
+
+This project was created to practice building a clean Rails API using RESTful routes, controllers, and database-backed models with basic validations. It serves as a simple example of creating and retrieving resources through HTTP endpoints.
